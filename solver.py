@@ -60,11 +60,4 @@ def solve_jumble(jumbled_word: str) -> list[str]:
     perms = get_perms(jum_letters)
     perm_strings = convert_to_strings(perms)
     words = get_words(perm_strings)
-    return words
-
-def main():
-    answer = solve_jumble('abc')
-    print(answer)
-
-if __name__ == '__main__':
-    main()
+    return sorted(words)
