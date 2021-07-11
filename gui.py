@@ -9,7 +9,7 @@ CANVAS_WIDTH = 400
 CHARACTER_LIMIT = 10
 FONT_FAMILY = 'Arial'
 FONT_SIZE = 18
-INPUT_HEIGHT = 50
+INPUT_HEIGHT = 52
 
 def format_words(words: list[str]) -> str:
     str = ''
@@ -22,11 +22,17 @@ def set_label_text(input: str):
     words = solve_jumble(input)
 
     if (not len(words)):
-        label['text'] = 'No solutions found'
-        label['fg'] = 'gray'
+        label.config(text = 'No solutions found', fg = 'gray')
     else:
-        label['text'] = format_words(words)
-        label['fg'] = 'black'
+        label.config(text = format_words(words), fg = 'black')
+
+def initial_state():
+    entry.focus_set()
+    label.config(text = 'Enter jumbled letters\nand click Solve', fg = 'gray')
+
+def reset_gui():
+    entry.delete(0, 'end')
+    initial_state()
 
 def character_limit(entry_text):
     if len(entry_text.get()) > 0:
@@ -34,6 +40,8 @@ def character_limit(entry_text):
 
 root = tk.Tk()
 root.title("Jumble Solver")
+img = tk.PhotoImage(file = 'icon.png')
+root.wm_iconphoto(True, img)
 
 canvas = tk.Canvas(root, height=CANVAS_HEIGHT, width=CANVAS_WIDTH)
 canvas.pack()
@@ -51,14 +59,19 @@ output_frame.pack(pady=(INPUT_HEIGHT, 0), fill='both', expand='true')
 
 entry_text = tk.StringVar()
 entry = tk.Entry(input_frame, font=(FONT_FAMILY, FONT_SIZE), textvariable = entry_text)
-entry.place(relx=0, relheight=1, relwidth=0.65)
+entry.place(relx=0, relheight=1, relwidth=0.6)
 entry_text.trace('w', lambda *args: character_limit(entry_text))
 
-button = tk.Button(input_frame, text="Solve", font=(FONT_FAMILY, FONT_SIZE), command=lambda: set_label_text(entry.get()))
-button.place(relx=0.7, relheight=1, relwidth=0.3)
+solve_button = tk.Button(input_frame, text="Solve", font=(FONT_FAMILY, FONT_SIZE), command=lambda: set_label_text(entry.get()))
+solve_button.place(relx=0.62, relheight=1, relwidth=0.18)
+
+reset_button = tk.Button(input_frame, text="Reset", font=(FONT_FAMILY, FONT_SIZE), command=lambda: reset_gui())
+reset_button.place(relx=0.82, relheight=1, relwidth=0.18)
 
 label = tk.Label(output_frame, font=(FONT_FAMILY, FONT_SIZE))
 label.place(relwidth=1, relheight=1)
+
+initial_state()
 
 def main():
     root.mainloop()
