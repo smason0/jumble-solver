@@ -15,7 +15,8 @@ jobs:
             TARGET: macos
             CMD_BUILD: >
                 pyinstaller -F -w -n JumbleSolver --add-data="words.txt:." --add-data="icon.png:." gui.py &&
-                cp words.txt icon.png /dist &&
+                cp words.txt /dist &&
+                cp icon.png /dist &&
                 cd dist/ &&
                 zip -r9 JumbleSolver-MacOS JumbleSolver.app/
             OUT_FILE_NAME: JumbleSolver-MacOS.zip
