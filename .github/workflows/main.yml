@@ -13,17 +13,12 @@ jobs:
         include:
           - os: macos-latest
             TARGET: MacOS
-            CMD_BUILD: >
-                pyinstaller -w -n JumbleSolver --add-data="words.txt:." --add-data="icon.png:." gui.py &&
-                cd dist/ &&
-                zip -r9 JumbleSolver-MacOS JumbleSolver.app/
-            ARTIFACT_NAME: JumbleSolver-MacOS.zip
+            CMD_BUILD: pyinstaller -w -n JumbleSolver-MacOS --add-data="words.txt:." --add-data="icon.png:." gui.py
+            ARTIFACT_NAME: JumbleSolver-MacOS
           - os: windows-latest
             TARGET: Windows
-            CMD_BUILD: >
-                pyinstaller -w -n JumbleSolver --add-data="words.txt;." --add-data="icon.png;." gui.py &&
-                tar -cf JumbleSolver-Windows.zip dist
-            ARTIFACT_NAME: JumbleSolver-Windows.zip
+            CMD_BUILD: pyinstaller -w -n JumbleSolver-Windows --add-data="words.txt;." --add-data="icon.png;." gui.py
+            ARTIFACT_NAME: JumbleSolver-Windows
 
     steps:
       - uses: actions/checkout@v1
@@ -40,6 +35,6 @@ jobs:
       - name: Publish artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: JumbleSolver-${{matrix.TARGET}}
-          path: ${{ github.workspace }}/${{ matrix.ARTIFACT_NAME }}
+          name: ${{matrix.ARTIFACT_NAME}}
+          path: ${{github.workspace}}/dist/${{matrix.ARTIFACT_NAME}}/*
 
