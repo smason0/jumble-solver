@@ -14,9 +14,7 @@ jobs:
           - os: macos-latest
             TARGET: macos
             CMD_BUILD: >
-                pyinstaller -F -w -n JumbleSolver --add-data="words.txt:." --add-data="icon.png:." gui.py &&
-                cp words.txt /dist &&
-                cp icon.png /dist &&
+                pyinstaller -w -n JumbleSolver --add-data="words.txt:." --add-data="icon.png:." gui.py &&
                 cd dist/ &&
                 zip -r9 JumbleSolver-MacOS JumbleSolver.app/
             OUT_FILE_NAME: JumbleSolver-MacOS.zip
@@ -24,9 +22,7 @@ jobs:
           - os: windows-latest
             TARGET: windows
             CMD_BUILD: >
-                pyinstaller -F -w -n JumbleSolver --add-data="words.txt;." --add-data="icon.png;." gui.py &&
-                copy words.txt .\dist &&
-                copy icon.png .\dist &&
+                pyinstaller -w -n JumbleSolver --add-data="words.txt;." --add-data="icon.png;." gui.py &&
                 tar -cf JumbleSolver-Windows.zip dist
             OUT_FILE_NAME: JumbleSolver-Windows.zip
             ASSET_MIME: application/zip
