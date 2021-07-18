@@ -38,7 +38,7 @@ jobs:
       - name: Build with pyinstaller for ${{matrix.TARGET}}
         run: ${{matrix.CMD_BUILD}}
       - name: Publish artifacts
-      - uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: JumbleSolver-${{matrix.TARGET}}
           path: ${{ github.workspace }}/${{ matrix.ARTIFACT_NAME }}
