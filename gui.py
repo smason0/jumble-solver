@@ -15,7 +15,7 @@ FONT_SIZE = 18
 INPUT_HEIGHT = 52
 LABEL_COLOR = '#fbe9d0'
 
-def format_words(words: list[str]) -> str:
+def format_words(words):
     """Converts list of words to a formatted string."""
     str = ''
     for word in words[:-1]:
@@ -23,7 +23,7 @@ def format_words(words: list[str]) -> str:
 
     return (str + words[-1])
 
-def set_label_text(input: str):
+def set_label_text(input):
     """Sets the text to display in the label widget."""
     words = solve_jumble(input)
 

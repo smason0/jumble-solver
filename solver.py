@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from itertools import permutations
 
-def get_perms(letters: list[str]) -> list[tuple[str]]:
+def get_perms(letters):
     """
     Gets all n-letter permutations using the letters in the input string
     where n is the number of letters.
@@ -23,7 +23,7 @@ def get_perms(letters: list[str]) -> list[tuple[str]]:
 
     return list(perms)
 
-def convert_to_strings(tups: list[tuple[str]]) -> list[str]:
+def convert_to_strings(tups):
     """Converts each string tuple to strings in the given list."""
     strings = []
 
@@ -32,7 +32,7 @@ def convert_to_strings(tups: list[tuple[str]]) -> list[str]:
 
     return strings
 
-def get_words(str_list: list[str]) -> list[str]:
+def get_words(str_list):
     """Reads from words text file and returns list of matching words from permutations."""
     with open('words.txt') as f:
         ref_words = f.read().splitlines()
@@ -45,7 +45,7 @@ def get_words(str_list: list[str]) -> list[str]:
 
     return list(words)
 
-def solve_jumble(jumbled_word: str) -> list[str]:
+def solve_jumble(jumbled_word):
     """
     Solves a Jumble puzzle based on given input string.
     Input must be between 2 and 10 letters long.
